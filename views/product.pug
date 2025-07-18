@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= product.name
+    p Price: $#{product.price}
+    p Description: #{product.description}
+    a(href='/cart') Add to Cart
+    br
+    a(href='/') Back to Products
