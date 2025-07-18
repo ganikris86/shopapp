@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Royal phone",
+    "price": 69.99,
+    "description": "Classic royal phone with vintage design and modern features.",
+    "imageUrl": "/img/phone.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Wireless Headphones",
+    "price": 49.99,
+    "description": "High-quality wireless headphones with noise cancellation.",
+    "imageUrl": "/img/wirelessHeadphone.png"
+  },
+  {
+    "id": 3,
+    "name": "Smart Watch",
+    "price": 99.99,
+    "description": "A stylish smart watch with multiple health tracking features.",
+    "imageUrl": "/img/smartWatch.png"
+  }
+]
