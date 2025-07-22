@@ -1,51 +1,41 @@
-doctype html
-html
-  head
-    title= title
-    style.
-      body {
-        background: url('/img/abstract.jpg') no-repeat center center fixed;
-        background-size: cover;
-        font-family: Arial, sans-serif;
-      }
-      .btn-group {
-        margin-top: 18px;
-        display: flex;
-        gap: 12px;
-      }
-      .btn {
-        display: inline-block;
-        padding: 8px 18px;
-        border-radius: 5px;
-        border: none;
-        background: linear-gradient(90deg, #757f9a 0%, #d7dde8 100%);
-        color: #222;
-        font-weight: bold;
-        text-decoration: none;
-        transition: transform 0.1s, box-shadow 0.1s;
-        box-shadow: 0 2px 8px rgba(117,127,154,0.10);
-        cursor: pointer;
-      }
-      .btn:hover {
-        transform: translateY(-2px) scale(1.04);
-        box-shadow: 0 4px 16px rgba(117,127,154,0.18);
-        background: linear-gradient(90deg, #d7dde8 0%, #757f9a 100%);
-        color: #111;
-      }
-      img {
-        width: 300px;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 8px;
-        display: block;
-        margin-bottom: 18px;
-      }
-  body
-    h1= product.name
-    if product.imageUrl
-      img(src=product.imageUrl.startsWith('http') ? product.imageUrl : `/${product.imageUrl.replace(/^\/?img\//, '')}`, alt=product.name)
-    p Price: $#{product.price}
-    p Description: #{product.description}
-    .btn-group
-      a.btn(href='/cart') Add to Cart
-      a.btn(href='/') Back
+extends layout
+
+block content
+  h1= product.name
+  if product.imageUrl
+    img(
+      src=product.imageUrl,
+      alt=product.name,
+      style="width:200px; height:200px; object-fit:cover; border-radius:6px; display:block; margin-bottom:12px;"
+    )
+  p Price: $#{product.price}
+  p Description: #{product.description}
+  .btn-group
+    a.btn(href='/cart', data-title=product.name, data-id=product.id, data-price=product.price) Add to Cart
+    a.btn(href='/') Back
+
+block scripts
+  script.
+    function viewContent(title, productId, price) {
+      //dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+      dataLayer.push({
+        event: "view_item",
+        ecommerce: {
+          currency: "AUD",
+          value: price,
+          items: [
+            {
+              item_id: productId,
+              item_name: title,
+              price: price,
+              quantity: 1
+            }
+          ]
+        }
+      });
+    }
+
+    // Call viewContent on page load with product details
+    document.addEventListener('DOMContentLoaded', function() {
+      viewContent("#{product.name}", "#{product._id}", #{product.price});
+    });

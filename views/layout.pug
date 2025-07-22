@@ -1,0 +1,105 @@
+doctype html
+html
+  head
+    title #{title}
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    // Google tag (gtag.js)
+    script(async src="https://www.googletagmanager.com/gtag/js?id=G-6CWRDSJM8T")
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6CWRDSJM8T');
+    // Google Tag Manager
+    script.
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5DRDJP65');
+    // End Google Tag Manager
+    style.
+      body {
+        background: url('/img/abstract.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+      }
+      .products-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .product {
+        background: #fff;
+        border-radius: 8px; 
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        margin: 20px 0;
+        padding: 16px;
+        max-width: 400px;
+        flex: 1 1 300px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 8px 18px;
+        border-radius: 5px;
+        border: none;
+        background: linear-gradient(90deg, #757f9a 0%, #d7dde8 100%);
+        color: #222;
+        font-weight: bold;
+        text-decoration: none;
+        transition: transform 0.1s, box-shadow 0.1s;
+        box-shadow: 0 2px 8px rgba(117,127,154,0.10);
+        cursor: pointer;
+      }
+      .btn:hover {
+        transform: translateY(-2px) scale(1.04);
+        box-shadow: 0 4px 16px rgba(117,127,154,0.18);
+        background: linear-gradient(90deg, #d7dde8 0%, #757f9a 100%);
+        color: #222;
+      }
+      .product img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 6px;
+        display: block;
+        margin-bottom: 12px;
+      }
+      .btn-group {
+        margin-top: 12px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+  body
+    // Google Tag Manager (noscript)
+    noscript
+      iframe(
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5DRDJP65",
+        height="0",
+        width="0",
+        style="display:none;visibility:hidden"
+      )
+    // End Google Tag Manager (noscript)
+    block content
+    block scripts
+      script.
+        function addToCart(title, productId, price) {
+          dataLayer.push({
+            event: "add_to_cart",
+            ecommerce: {
+              currency: "AUD",
+              value: price,
+              items: [
+                {
+                  item_id: productId,
+                  item_name: title,
+                  price: price,
+                  quantity: 1
+                }
+              ]
+            }
+          });
+          console.log(`Added to DL`);
+          console.log(`${JSON.stringify(dataLayer)}`);
+        }

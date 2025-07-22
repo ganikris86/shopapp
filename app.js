@@ -11,10 +11,16 @@ app.set('view engine', 'pug');
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Cache control
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'public, max-age=3600'); // Adjust max-age as needed
+  next();
+});
+
 // Routes
 app.get('/', (req, res) => {
   const products = productService.getAllProducts();
-  res.render('index', { title: 'Shop App', products });
+  res.render('index', { title: 'ShopApp', products });
 });
 
 app.get('/product/:id', (req, res) => {
