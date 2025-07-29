@@ -8,6 +8,11 @@ block content
 block scripts
   script.
     function purchase(title, productId, price) {
+
+      dataLayer.push({
+        event: "custom-purchase"
+      });
+
       dataLayer.push({
         event: "purchase",
         ecommerce: {
