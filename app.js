@@ -11,6 +11,9 @@ app.set('view engine', 'pug');
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Serve .well-known directory for Let's Encrypt verification
+app.use('/.well-known', express.static('.well-known'));
+
 // Cache control
 app.use((req, res, next) => {
   res.set('Cache-Control', 'public, max-age=3600'); // Adjust max-age as needed
